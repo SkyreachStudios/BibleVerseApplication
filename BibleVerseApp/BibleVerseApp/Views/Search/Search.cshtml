@@ -1,0 +1,69 @@
+﻿@using BibleVerseApp.Models
+@model BibleVerseApp.Models.VerseModel
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Search</h2>
+
+@using (Html.BeginForm("Search", "Search", FormMethod.Post))
+{
+    
+    @Html.AntiForgeryToken()
+    <div  align="center">
+        <div class="form-horizontal">
+            <h3 align="center" style="font-family:Impact">Enter the bible verse you would like to search for.</h3>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            
+                <label for="testament" align="center"><b>Testament:</b></label>
+                
+                    @Html.DropDownListFor(model => model.Testament, new SelectList(Enum.GetValues(typeof(VerseModel.TestamentType))))
+                    @Html.ValidationMessageFor(model => model.Testament, "", new { @class = "text-danger" })
+              
+
+                <label for="book" align="center"><b>Book:</b></label>
+               
+                    @Html.DropDownListFor(model => model.Book, new SelectList(Enum.GetValues(typeof(VerseModel.BookType))))
+                    @Html.ValidationMessageFor(model => model.Book, "", new { @class = "text-danger" })
+                
+
+
+                <label for="Chapter" align="center"><b>Chapter:</b></label>
+                
+                    @Html.EditorFor(model => model.Chapter)
+                    @Html.ValidationMessageFor(model => model.Chapter, "", new { @class = "text-danger" })
+                
+                <label for="Number" align="center"><b>Number:</b></label>
+                
+                    @Html.EditorFor(model => model.Verse )
+                    @Html.ValidationMessageFor(model => model.Verse, "", new { @class = "text-danger" })
+                
+                
+                    <input type="submit" value="Search for Verse" class="btn btn-default" />
+                
+               
+
+        </div>
+    </div>
+}
+@{ 
+    if(Model == null)
+    {
+
+    }
+    else if(Model.SearchStatus == 1){
+        <div>
+            @Html.Partial("~/Views/Search/SearchDisplay_found.cshtml")
+        </div>
+    }
+    else
+    {
+        <div>
+            @Html.Partial("~/Views/Search/SearchDisplay_notFound.cshtml")
+        </div>
+    }
+}
+
