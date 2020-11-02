@@ -21,12 +21,6 @@ namespace BibleVerseApp.Utilities.Utility
 
         public MyLogger() { }
 
-        //     [InjectionMethod]
-        //     public void Initialize(ILogger logger)
-        //     {
-        //         _logger = logger;
-        //     }
-
 
         public void Debug(string message, string arg = null)
         {

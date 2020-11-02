@@ -52,10 +52,11 @@ namespace BibleVerseApp.Utilities.Business
                 }
                 finally
                 {
+                    logger.Info("Closing DB connection");
                     connection.Close();
                 }
             }
-
+            
             return results;
         }
 

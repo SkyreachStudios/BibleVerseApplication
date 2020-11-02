@@ -12,10 +12,10 @@ namespace BibleVerseApp.Controllers
 {
     public class SearchController : Controller
     {
-        
+       
         public ILogger logger { get; set; }
         public SearchService searchService { get; set; }
-
+       
     
 
         // GET: Search
@@ -28,10 +28,12 @@ namespace BibleVerseApp.Controllers
         //model values to the coresponding values.
         public ActionResult Search (VerseModel model)
         {
+            logger = new MyLogger();
             SearchService service = new SearchService();
             if (service.Authenticate(model))
             {
-                logger.Info("The given credentials returned a verse which exists in the database.");
+                
+                logger.Info("The given credentials returned a verse which exists in the database: " +model.Testament+ "|"+model.Book+"|"+model.Chapter+"|"+model.Verse+"|"+model.VerseText);
                 model = service.changeValues(model);
                 return View("~/Views/Search/Search.cshtml", model);
             }

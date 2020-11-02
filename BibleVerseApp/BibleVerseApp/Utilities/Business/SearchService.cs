@@ -10,8 +10,7 @@ namespace BibleVerseApp.Services.Business
 {
     public class SearchService
     {
-        [Dependency]
-        public SearchDAO searchDAO { get; set; }
+       
 
         //method which calls the DAO function to find if the given verse is valid and return a true or false
         public bool Authenticate(VerseModel verse)

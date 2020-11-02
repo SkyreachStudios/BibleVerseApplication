@@ -11,8 +11,8 @@ namespace BibleVerseApp.Services.Data
 {
     public class SearchDAO
     {
-        [Dependency]
-        public ILogger logger { get; set; }
+        
+        
         //method for finding the verse to identify if it exists in the database
         public bool findByVerse(VerseModel verse)
         {
@@ -36,7 +36,7 @@ namespace BibleVerseApp.Services.Data
                             string foo = reader.GetString(1);
                             if (reader.GetString(1).Equals(verse.Testament) && reader.GetString(2).Equals(verse.Book) && reader.GetInt32(3).Equals(verse.Chapter) && reader.GetInt32(4).Equals(verse.Verse))
                             {
-                                logger.Info("Found the verse that the user was searching for. Testament: " + reader.GetString(1) + " Book: " + reader.GetString(2) + " Chapter: " + reader.GetInt32(3) + " Verse Number: " + reader.GetInt32(4));
+                                
                                 foundVerse = true;
                             }
                         }
@@ -46,12 +46,12 @@ namespace BibleVerseApp.Services.Data
                 }
                 catch (Exception ex)
                 {
-                    logger.Error("Error in finding the given criteria: " + ex.Message);
+                    
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    logger.Info("closing database connection");
+                    
                     connection.Close();
                 }
             }
@@ -80,7 +80,7 @@ namespace BibleVerseApp.Services.Data
                             string foo = reader.GetString(1);
                             if (reader.GetString(1).Equals(verse.Testament) && reader.GetString(2).Equals(verse.Book) && reader.GetInt32(3).Equals(verse.Chapter) && reader.GetInt32(4).Equals(verse.Verse))
                             {
-                                logger.Info("Found the verse that the user was searching for and setting values to: Testament: " + reader.GetString(1) + " Book: " + reader.GetString(2) + " Chapter: " + reader.GetInt32(3) + " Verse Number: " + reader.GetInt32(4));
+                                
                                 foundVerse.Testament = reader.GetString(1);
                                 foundVerse.Book = reader.GetString(2);
                                 foundVerse.Chapter = reader.GetInt32(3);
@@ -97,12 +97,12 @@ namespace BibleVerseApp.Services.Data
                 }
                 catch (Exception ex)
                 {
-                    logger.Error("Error in finding the given criteria: " + ex);
+                    
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    logger.Info("closing database connection");
+                  
                     connection.Close();
                 }
             }
